@@ -72,6 +72,50 @@ export default function Tables() {
     }
   };
 
+  const handleRowDelete11 = (oldData, resolve) => {
+    axios
+      .delete(`https://jsonplaceholder.typicode.com/users/${oldData.id}`)
+      .then((response) => {
+        const dataDelete = [...user];
+        const index = oldData.tableData.id;
+        dataDelete.splice(index, 1);
+        setUser([...dataDelete]);
+        resolve();
+      })
+      .catch((error) => {
+        setErrorMessages(["Delete failed! Server error"]);
+        setIserror(true);
+        resolve();
+      });
+  };
+
+  const handleRowDelete = (oldData, resolve) => {
+    console.log("in handle row delete ");
+    var username = oldData.username;
+
+    fetch("/deleteUserByName", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username,
+      }),
+    })
+      .then((response) => {
+        fetchData();
+        setIserror(false);
+        setErrorMessages([]);
+        resolve();
+      })
+
+      .catch((error) => {
+        setErrorMessages(["Cannot delete data. Server error!"]);
+        setIserror(true);
+        resolve();
+      });
+  };
+
   const handleRowAdd = (newData, resolve) => {
     console.log("in handle row add ");
     let errorList = [];
@@ -145,20 +189,10 @@ export default function Tables() {
                 new Promise((resolve) => {
                   handleRowUpdate(updateData, oldData, resolve);
                 }),
-              onRowDelete: (oldData) => {
-                return new Promise((resolve, reject) => {
-                  setTimeout(() => {
-                    const dataDelete = [...data];
-                    const target = dataDelete.find(
-                      (el) => el.id === oldData.tableData.id,
-                    );
-                    const index = dataDelete.indexOf(target);
-                    dataDelete.splice(index, 1);
-                    setData([...dataDelete]);
-                    resolve();
-                  }, 1000);
-                });
-              },
+              onRowDelete: (oldData) =>
+                new Promise((resolve) => {
+                  handleRowDelete(oldData, resolve);
+                }),
             }}
           />
         </Grid>
