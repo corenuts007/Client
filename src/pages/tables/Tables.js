@@ -31,27 +31,27 @@ export default function Tables() {
       });
   };
   const columns = [
-    { title: "id", field: "id", editable: false },
+    { title: "Location", field: "location" },
     { title: "First Name", field: "username" },
     { title: "Password", field: "password" },
   ];
-  const handleRowUpdate = (newData, oldData, resolve) => {
+  const handleRowUpdate = (updateData, oldData, resolve) => {
     let errorList = [];
-    if (newData.username === undefined) {
+    if (updateData.username === undefined) {
       errorList.push("Please enter user name");
     }
-    if (newData.password === undefined) {
+    if (updateData.password === undefined) {
       errorList.push("Please enter password");
     }
 
     if (errorList.length < 1) {
-      fetch("/createuser", {
+      fetch("/updateUserByName", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          newData,
+          updateData,
         }),
       })
         .then((response) => {
@@ -73,7 +73,7 @@ export default function Tables() {
   };
 
   const handleRowAdd = (newData, resolve) => {
-    console.log("11111111");
+    console.log("in handle row add ");
     let errorList = [];
     if (newData.username === undefined) {
       errorList.push("Please enter user name");
@@ -81,7 +81,7 @@ export default function Tables() {
     if (newData.password === undefined) {
       errorList.push("Please enter password");
     }
-    console.log("2222");
+    console.log("in handle row add with no erros");
     if (errorList.length < 1) {
       //no error
       console.log("333333s");
@@ -141,9 +141,9 @@ export default function Tables() {
                 new Promise((resolve) => {
                   console.log("Row Adding"), handleRowAdd(newData, resolve);
                 }),
-              onRowUpdate: (newData, oldData) =>
+              onRowUpdate: (updateData, oldData) =>
                 new Promise((resolve) => {
-                  handleRowUpdate(newData, oldData, resolve);
+                  handleRowUpdate(updateData, oldData, resolve);
                 }),
               onRowDelete: (oldData) => {
                 return new Promise((resolve, reject) => {
