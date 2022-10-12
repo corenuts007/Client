@@ -1,3 +1,5 @@
+https://github.com/corenuts007/Client
+
 …or create a new repository on the command line
 echo "# Client" >> README.md
 git init
