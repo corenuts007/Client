@@ -26,7 +26,8 @@ import Maps from "../../pages/maps";
 import Tables from "../../pages/tables";
 import Icons from "../../pages/icons";
 import Charts from "../../pages/charts";
-
+import Camera from "../../pages/camera";
+import Alert from "../../pages/alert";
 // context
 import { useLayoutState } from "../../context/LayoutContext";
 
@@ -51,6 +52,9 @@ function Layout(props) {
             <Route path="/app/Dashboard" component={Dashboard} />
             <Route path="/app/typography" component={Typography} />
             <Route path="/app/tables" component={Tables} />
+            <Route path="/app/camera" component={Camera} />
+            <Route path="/app/alert" component={Alert} />
+
             {/*
               <Route path="/app/notifications" component={Notifications} />
               <Route
