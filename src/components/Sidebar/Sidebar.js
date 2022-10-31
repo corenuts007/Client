@@ -37,7 +37,7 @@ const structure = [
     link: "/app/typography",
     icon: <TypographyIcon />,
   },
-  { id: 2, label: "Tables", link: "/app/tables", icon: <TableIcon /> },
+  { id: 2, label: "Users", link: "/app/tables", icon: <TableIcon /> },
   {
     id: 3,
     label: "Notifications",
@@ -57,9 +57,24 @@ const structure = [
   },
   { id: 5, type: "divider" },
   { id: 6, type: "title", label: "HELP" },
-  { id: 7, label: "Library", link: "https://flatlogic.com/templates", icon: <LibraryIcon /> },
-  { id: 8, label: "Support", link: "https://flatlogic.com/forum", icon: <SupportIcon /> },
-  { id: 9, label: "FAQ", link: "https://flatlogic.com/forum", icon: <FAQIcon /> },
+  {
+    id: 7,
+    label: "Library",
+    link: "https://flatlogic.com/templates",
+    icon: <LibraryIcon />,
+  },
+  {
+    id: 8,
+    label: "Support",
+    link: "https://flatlogic.com/forum",
+    icon: <SupportIcon />,
+  },
+  {
+    id: 9,
+    label: "FAQ",
+    link: "https://flatlogic.com/forum",
+    icon: <FAQIcon />,
+  },
   { id: 10, type: "divider" },
   { id: 11, type: "title", label: "PROJECTS" },
   {
@@ -93,7 +108,7 @@ function Sidebar({ location }) {
   // local
   var [isPermanent, setPermanent] = useState(true);
 
-  useEffect(function() {
+  useEffect(function () {
     window.addEventListener("resize", handleWindowWidthChange);
     handleWindowWidthChange();
     return function cleanup() {
@@ -127,7 +142,7 @@ function Sidebar({ location }) {
         </IconButton>
       </div>
       <List className={classes.sidebarList}>
-        {structure.map(link => (
+        {structure.map((link) => (
           <SidebarLink
             key={link.id}
             location={location}
