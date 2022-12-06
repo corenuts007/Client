@@ -25,3 +25,4 @@ yarn-error.log*
 .eslintcache
 .eslintcache
 src/components/Popup/a.avi
+yarn.lock
